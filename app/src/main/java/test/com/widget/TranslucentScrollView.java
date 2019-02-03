@@ -197,10 +197,7 @@ public class TranslucentScrollView extends ScrollView {
         if (zoomView != null) {
             ViewGroup.LayoutParams params = zoomView.getLayoutParams();
             switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
 
-
-                    break;
                 case MotionEvent.ACTION_UP:
                     //手指离开后恢复图片
 

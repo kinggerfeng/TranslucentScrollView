@@ -82,7 +82,7 @@ public final class TranslucentActionBar extends LinearLayout {
             layRoot.setBackgroundDrawable(null);
         }
         if (!titleInitVisibile) {
-            tvTitle.setVisibility(View.GONE);
+//            tvTitle.setVisibility(View.GONE);
         }
     }
 
@@ -95,7 +95,7 @@ public final class TranslucentActionBar extends LinearLayout {
         if (!TextUtils.isEmpty(strTitle)) {
             tvTitle.setText(strTitle);
         } else {
-            tvTitle.setVisibility(View.GONE);
+//            tvTitle.setVisibility(View.GONE);
         }
     }
 
@@ -113,7 +113,7 @@ public final class TranslucentActionBar extends LinearLayout {
         if (!TextUtils.isEmpty(strTitle)) {
             tvTitle.setText(strTitle);
         } else {
-            tvTitle.setVisibility(View.GONE);
+           // tvTitle.setVisibility(View.GONE);
         }
         if (!TextUtils.isEmpty(strLeft)) {
             tvLeft.setText(strLeft);

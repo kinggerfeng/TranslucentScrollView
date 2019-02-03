@@ -12,6 +12,7 @@
         android:layout_height="1.0dp" />
 
     <RelativeLayout
+        android:id="@+id/bar"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:orientation="vertical">
@@ -29,7 +30,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
                 android:background="@mipmap/ic_left_light"
-                android:visibility="gone" />
+                 />
 
             <TextView
                 android:id="@+id/tv_actionbar_left"
@@ -41,7 +42,7 @@
                 android:maxLength="2"
                 android:singleLine="true"
                 android:text="返回"
-                android:visibility="gone" />
+                 />
         </RelativeLayout>
 
         <TextView
@@ -66,7 +67,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
-                android:visibility="gone" />
+                 />
 
             <TextView
                 android:id="@+id/tv_actionbar_right"
@@ -76,7 +77,7 @@
                 android:layout_toLeftOf="@+id/v_actionbar_right"
                 android:gravity="center_vertical|right"
                 android:singleLine="true"
-                android:visibility="gone" />
+                 />
         </RelativeLayout>
 
     </RelativeLayout>

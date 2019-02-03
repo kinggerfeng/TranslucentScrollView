@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
 
 import test.com.base.BaseActivity;
 import test.com.impl.ActionBarClickListener;
@@ -49,13 +50,14 @@ public class MainActivity extends BaseActivity implements ActionBarClickListener
             // 虚拟导航键
 //            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         }
+
         init();
     }
 
     private void init() {
         actionBar = (TranslucentActionBar) findViewById(R.id.actionbar);
         //初始actionBar
-        actionBar.setData("测试", 0, null, 0, null, null);
+        actionBar.setData("测试", 0, null, R.mipmap.ic_right_gray, "惨淡", null);
         //开启渐变
         actionBar.setNeedTranslucent();
         //设置状态栏高度
@@ -86,7 +88,11 @@ public class MainActivity extends BaseActivity implements ActionBarClickListener
 
     @Override
     public void onTranslucentChanged(int transAlpha) {
-        actionBar.tvTitle.setVisibility(transAlpha > 48 ? View.VISIBLE : View.GONE);
+        //todo: 渐变显示
+        RelativeLayout rl = findViewById(R.id.bar);
+//        actionBar.tvTitle.setVisibility(transAlpha > 48 ? View.VISIBLE : View.GONE); //todo： 去掉，改为整个bar隐藏
+//        actionBar.tvTitle.setVisibility(View.VISIBLE);
+        rl.setAlpha(transAlpha/255f);
     }
 
 }
