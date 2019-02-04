@@ -1,16 +1,23 @@
 package test.com;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import test.com.base.BaseActivity;
 import test.com.impl.ActionBarClickListener;
+import test.com.utils.SizeUtils;
 import test.com.widget.TranslucentActionBar;
 import test.com.widget.TranslucentScrollView;
 
@@ -24,6 +31,9 @@ public class MainActivity extends BaseActivity implements ActionBarClickListener
     private TranslucentScrollView translucentScrollView;
     private TranslucentActionBar actionBar;
     private View zoomView;
+    private RelativeLayout rl;
+    //    private float[] scrollTopOrBottom = {0f, 0f};
+    private boolean isDoing = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,7 +67,7 @@ public class MainActivity extends BaseActivity implements ActionBarClickListener
     private void init() {
         actionBar = (TranslucentActionBar) findViewById(R.id.actionbar);
         //初始actionBar
-        actionBar.setData("测试", 0, null, R.mipmap.ic_right_gray, "惨淡", null);
+        actionBar.setData("测试", R.mipmap.ic_left_light, "返回", R.mipmap.ic_right_gray, "惨淡", this);
         //开启渐变
         actionBar.setNeedTranslucent();
         //设置状态栏高度
@@ -78,21 +88,59 @@ public class MainActivity extends BaseActivity implements ActionBarClickListener
 
     @Override
     public void onLeftClick() {
-
+        Toast.makeText(MainActivity.this, "onLeftClick", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onRightClick() {
+        Toast.makeText(MainActivity.this, "onRightClick", Toast.LENGTH_SHORT).show();
+
+    }
+
+    public void refresh() {
+        isDoing = true;
+        Log.i("eee", "refresh");
 
     }
 
     @Override
-    public void onTranslucentChanged(int transAlpha) {
+    public void onTranslucentPullChanged(int CurrentHeight, int defaultHeight, int pullDistance) {
+
+
+        if (pullDistance > 80 && !isDoing) {
+            refresh();
+        }
+
+    }
+
+    @Override
+    public void onTranslucentChanged(int transAlpha, float scrollY) {
         //todo: 渐变显示
-        RelativeLayout rl = findViewById(R.id.bar);
-//        actionBar.tvTitle.setVisibility(transAlpha > 48 ? View.VISIBLE : View.GONE); //todo： 去掉，改为整个bar隐藏
+        rl = findViewById(R.id.bar);
+//        actionBar.tvTitle.setVisibility(transAlpha > 48 ? View.VISIBLE : View.GONE);
 //        actionBar.tvTitle.setVisibility(View.VISIBLE);
-        rl.setAlpha(transAlpha/255f);
+//        Log.i("scrollY", "1234");
+        TextView tv = findViewById(R.id.tv_name);
+        tv.setText("scrollY: " + scrollY);
+//不设置出现效果2：字体一直保持不变
+        //效果1：（字体透明切换效果不好）
+//        if (transAlpha > 0) {
+//            rl.setAlpha(transAlpha / 255f);
+//        } else {
+//            rl.setAlpha(1); //todo： 实现渐变
+//
+//
+//        }
+
+        //            rl.animate().alpha(0f).setDuration(1000)
+//                    .setListener(new AnimatorListenerAdapter() {
+//                        @Override
+//                        public void onAnimationEnd(Animator animation) {
+//                            rl.setAlpha(1);
+//                        }
+//
+//                    });
+
     }
 
 }

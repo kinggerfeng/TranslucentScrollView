@@ -45,6 +45,8 @@ public class TranslucentScrollView extends ScrollView {
     //渐变结束位置
     private int transEndY = 300;
 
+    private float scrollY;
+
     //渐变开始默认位置，Y轴，50dp
     private final int DFT_TRANSSTARTY = 50;
     //渐变结束默认位置，Y轴，300dp
@@ -58,7 +60,9 @@ public class TranslucentScrollView extends ScrollView {
          *
          * @param transAlpha
          */
-        void onTranslucentChanged(int transAlpha);
+        void onTranslucentChanged(int transAlpha, float scrollY);
+
+        void onTranslucentPullChanged(int CurrentHeight, int defaultHeight, int pullDistance);
     }
 
     public TranslucentScrollView(Context context) {
@@ -138,7 +142,7 @@ public class TranslucentScrollView extends ScrollView {
      * @return
      */
     private int getTransAlpha() {
-        float scrollY = getScrollY();
+
         if (transStartY != 0) {
             if (scrollY <= transStartY) {
                 return 0;
@@ -162,7 +166,7 @@ public class TranslucentScrollView extends ScrollView {
 
         final ViewGroup.LayoutParams lp = zoomView.getLayoutParams();
         final float h = zoomView.getLayoutParams().height;// ZoomView当前高度
-        Toast.makeText(getContext(), "resetZoomView, h: " + h, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), "resetZoomView, h: " + h, Toast.LENGTH_SHORT).show();
         // 设置动画
         ValueAnimator anim = ObjectAnimator.ofFloat(0.0F, 1.0F).setDuration(200);
 
@@ -182,13 +186,13 @@ public class TranslucentScrollView extends ScrollView {
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
         super.onScrollChanged(l, t, oldl, oldt);
         int transAlpha = getTransAlpha();
-
+        scrollY = getScrollY();
         if (transView != null) {
             Log.d(TAG, "[onScrollChanged .. in ], 透明度 == " + transAlpha);
             transView.setBackgroundColor(ColorUtils.setAlphaComponent(transColor, transAlpha));
         }
         if (translucentChangedListener != null) {
-            translucentChangedListener.onTranslucentChanged(transAlpha);
+            translucentChangedListener.onTranslucentChanged(transAlpha, scrollY);
         }
     }
 
@@ -222,7 +226,10 @@ public class TranslucentScrollView extends ScrollView {
                     }
                     params.height = zoomViewInitHeight + distance;
 
-                    Log.d(TAG, "params.height == " + params.height + ", zoomViewInitHeight == " + zoomViewInitHeight + ", distance == " + distance);
+                    if (translucentChangedListener != null) {
+                        translucentChangedListener.onTranslucentPullChanged(params.height, zoomViewInitHeight, distance);
+                    }
+//                    Log.d(TAG, "params.height == " + params.height + ", zoomViewInitHeight == " + zoomViewInitHeight + ", distance == " + distance);
 
                     zoomView.setLayoutParams(params);
                     return true;

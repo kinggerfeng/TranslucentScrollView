@@ -39,11 +39,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <View
-                        android:id="@+id/v_statusbar"
-                        android:layout_width="match_parent"
-                        android:layout_height="0.0dp"
-                        android:background="@color/translate" />
+                    <!--<View-->
+                    <!--android:id="@+id/v_statusbar"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="0.0dp"-->
+                    <!--android:background="@color/translate" />-->
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -434,8 +434,9 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
+                    android:layout_height="450dp"
                     android:background="#611" />
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="10dp"

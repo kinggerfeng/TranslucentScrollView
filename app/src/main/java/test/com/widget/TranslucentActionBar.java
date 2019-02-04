@@ -7,7 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import test.com.MainActivity;
 import test.com.R;
 import test.com.impl.ActionBarClickListener;
 
@@ -119,24 +121,24 @@ public final class TranslucentActionBar extends LinearLayout {
             tvLeft.setText(strLeft);
             tvLeft.setVisibility(View.VISIBLE);
         } else {
-            tvLeft.setVisibility(View.GONE);
+//            tvLeft.setVisibility(View.GONE);
         }
         if (!TextUtils.isEmpty(strRight)) {
             tvRight.setText(strRight);
             tvRight.setVisibility(View.VISIBLE);
         } else {
-            tvRight.setVisibility(View.GONE);
+//            tvRight.setVisibility(View.GONE);
         }
 
         if (resIdLeft == 0) {
-            iconLeft.setVisibility(View.GONE);
+//            iconLeft.setVisibility(View.GONE);
         } else {
             iconLeft.setBackgroundResource(resIdLeft);
             iconLeft.setVisibility(View.VISIBLE);
         }
 
         if (resIdRight == 0) {
-            iconRight.setVisibility(View.GONE);
+//            iconRight.setVisibility(View.GONE);
         } else {
             iconRight.setBackgroundResource(resIdRight);
             iconRight.setVisibility(View.VISIBLE);
@@ -148,6 +150,7 @@ public final class TranslucentActionBar extends LinearLayout {
             layLeft.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     listener.onLeftClick();
                 }
             });
